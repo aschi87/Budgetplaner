@@ -1,6 +1,10 @@
+jQuery(function($){
+   $('#datepicker').datepicker();
+});
+
 function addToList() {
     var amountValue = $('#betrag').val();
-    var datDate = $("#datepicker").datepicker({
+    var dateValue = $("#datepicker").datepicker({
         dateFormat: 'dd.mm.yyyy'
     }).val();
     var nameValue = $('#posten').val();

@@ -5391,7 +5391,7 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 1020;
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
@@ -5440,6 +5440,7 @@ button.close {
 .modal-backdrop.in {
   opacity: 0.5;
   filter: alpha(opacity=50);
+    z-index: auto;
 }
 .modal-header {
   padding: 15px;

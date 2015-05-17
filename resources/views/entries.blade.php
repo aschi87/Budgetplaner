@@ -25,7 +25,7 @@
                                         <div class="row">
                                             <div class="col-md-4">Datum:</div>
                                             <div class="col-md-4">
-                                                <input class="datepicker" id="datepicker" data-date-format="yyyy/mm/dd" type="date">
+                                                <input class="datepicker" id="datepicker" data-date-format="yyyy-mm-dd" type="text">
                                             </div>
                                         </div>
                                         <div class="row">
