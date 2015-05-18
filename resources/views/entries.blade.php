@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Budget: {{$budgetPlans[0]->name}}</div> <!-- Wie macht man die 0 dynamisch?-->
+                    <div class="panel-heading">Budget: {{$budgetPlans[$id-1]->name}}</div> <!-- Wie macht man die 0 dynamisch?-->
 
                     <div class="panel-body">
 
@@ -22,35 +22,39 @@
                                         <h4 class="modal-title" id="myModalLabel">Neuer Eintrag</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-4">Datum:</div>
-                                            <div class="col-md-4">
-                                                <input class="datepicker" id="datepicker" data-date-format="yyyy-mm-dd" type="text">
+                                        <form class="form-horizontal" id="form">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Datum:</label>
+                                                <div class="col-sm-8">
+                                                    <input id="datepicker" name="datepicker" type="text" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">Posten:</div>
-                                            <div class="col-md-4">
-                                                <input type="text" id="posten"> </input>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Posten:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" id="posten" name="posten" required> </input>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">Kategorie:</div>
-                                            <div class="col-md-4">
-                                                <select id="select">
-                                                    @foreach ($categoryIdName as $cat)
-                                                        <option value="kategorie1">{{$cat->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Kategorie:</label>
+                                                <div class="col-sm-8">
+                                                    <select id="select" name="select" required>
+                                                        @foreach ($categoryIdName as $cat)
+                                                            <option value="kategorie1">{{$cat->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">Betrag: CHF</div>
-                                            <div class="col-md-4">
-                                                <input type="text" id="betrag"> </input>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Betrag: CHF</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" id="betrag" name="betrag" required> </input>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <input type="hidden" id="planId" name="planId" value="{{$id}}"> </input>
+                                        </form>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" onclick="addToList()">Save changes</button>

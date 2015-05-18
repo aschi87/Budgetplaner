@@ -20,7 +20,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script>
         $("document").ready(function(){
-            $("#datepicker").datepicker()
+            $("#datepicker").datepicker({dateFormat: "yyyy-mm-dd"})
         });
     </script>
 </head>

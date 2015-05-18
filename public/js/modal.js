@@ -1,12 +1,11 @@
 jQuery(function($){
-   $('#datepicker').datepicker();
+   $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 });
 
 function addToList() {
+
     var amountValue = $('#betrag').val();
-    var dateValue = $("#datepicker").datepicker({
-        dateFormat: 'dd.mm.yyyy'
-    }).val();
+    var dateValue = $("#datepicker").datepicker({dateFormat: 'dd-mm-yy'}).val();
     var nameValue = $('#posten').val();
     var categoryValue = $('#select :selected').text();
 
@@ -21,4 +20,8 @@ function addToList() {
     name.innerHTML = nameValue;
     category.innerHTML = categoryValue;
     amount.innerHTML = amountValue;
+
+    $.post( "plan/" + $("#planId") + "/add", {}, function( data ) {
+        $( ".result" ).html( data );
+    });
 }
