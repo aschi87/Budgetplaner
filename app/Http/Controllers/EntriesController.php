@@ -3,54 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Budget;
+use App\Category;
+use App\Entry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent;
 use Illuminate\Support\Facades\DB;
+use Request;
 
 class EntriesController extends Controller {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     *
-     *
-     * @return Response
-     */
     public function index($id)
     {
+
+        // Sollte noch überprüft werden, damit man nicht über die URL die Einträge einsehen kann.
         $user = User::find(Auth::id());
-        $budgetPlans = $user->budgets;
-        // Achtung: von User 1
-        $entriesFromUserOne = DB::select(DB::raw("SELECT e.date, e.name AS entryName, c.name AS categoryName, e.amount, c.budget_id, b.name, bu.user_id FROM entries e INNER JOIN categories c ON e.category_id = c.id INNER JOIN budgets b ON c.budget_id = b.id INNER JOIN budget_user bu ON bu.budget_id = c.budget_id AND bu.user_id = 1 AND c.budget_id = $id;"));
-        $categoryIdName = DB::table('categories')->select('id', 'name')->get();
-        return view('entries', compact('user', 'budgetPlans', 'entriesFromUserOne', 'categoryIdName', 'id'));
+        $budget = Budget::find($id);
+        $categories = $budget->categories;
+        return view('entries', compact('user', 'budget', 'categories', 'id'));
     }
 
-    public function saveEntry($id)
+    public function saveEntry(Request $request, $id)
     {
-        // How can
+        $posten = Request::all();
 
+        $entry = new Entry;
+        $entry->name = Request::input('name');
+        $entry->amount = Request::input('amount');
+        $entry->date = Request::input('date');
+        $entry->category_id = Request::input('category');
 
-        // Get id from category (still hardcoded with 'Coop'
-        $catName = DB::table('categories AS c')->select('c.id')->where('c.name', 'Coop')->first();
+        $entry->save();
 
-        // Wie muss CategoryController aussehen, damit das hier geht?
-        //$omg = Category::where('name', 'Coop');
-
-        //echo "<script type='text/javascript'>alert('$catName->id');</script>";
-        //echo "<script type='text/javascript'>alert('$omg->id');</script>";
-        /*
-        DB::table('entries')->insert(
-            array('name' => 'InsertPosten', 'amount' => 111, 'date' => '1987-03-14', 'category_id' => $catName->id)
-        );*/
+        return redirect('plan/'.$id);
     }
 
 }

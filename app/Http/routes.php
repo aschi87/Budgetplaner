@@ -12,15 +12,15 @@
 */
 
 Route::get('/', 'WelcomeController@index');
-Route::get('/overview', 'WelcomeController@index');
-Route::get('/budgetplan', 'WelcomeController@index');
+Route::get('/overview', 'OverviewController@index');
+Route::get('/budgetplan', 'BudgetplanController@index');
 
 Route::get('home', function(){return Redirect::to('budget');});
 Route::get('budget', 'BudgetController@index');
 
 Route::pattern('id', '[0-9]+');
 Route::get('plan/{id}', 'EntriesController@index');
-Route::get('plan/{id}/add','EntriesController@saveEntry');
+Route::post('plan/{id}','EntriesController@saveEntry');
 
 
 Route::controllers([

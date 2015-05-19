@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Budget: {{$budgetPlans[$id-1]->name}}</div> <!-- Wie macht man die 0 dynamisch?-->
+                    <div class="panel-heading">Budget: {{ $budget->name }}</div> <!-- Wie macht man die 0 dynamisch?-->
 
                     <div class="panel-body">
 
-                        <button id="btnEntry" type="button" class="myButton" data-toggle="modal" data-target="#myModal">
+                        <button id="btnEntry" type="button" class="myButton"  data-toggle="modal" data-target="#myModal">
                             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Eintrag
                         </button>
 
@@ -22,25 +22,25 @@
                                         <h4 class="modal-title" id="myModalLabel">Neuer Eintrag</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal" id="form">
+                                        <form class="form-horizontal" id="entriesForm" action="{{$id}}" method="POST">
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Datum:</label>
                                                 <div class="col-sm-8">
-                                                    <input id="datepicker" name="datepicker" type="text" required>
+                                                    <input id="datepicker" name="date" type="text" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Posten:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" id="posten" name="posten" required> </input>
+                                                    <input type="text" id="name" name="name" required> </input>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Kategorie:</label>
                                                 <div class="col-sm-8">
-                                                    <select id="select" name="select" required>
-                                                        @foreach ($categoryIdName as $cat)
-                                                            <option value="kategorie1">{{$cat->name}}</option>
+                                                    <select id="select" name="category" required>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{$category->id}}">{{$category->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -48,16 +48,17 @@
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Betrag: CHF</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" id="betrag" name="betrag" required> </input>
+                                                    <input type="number" id="amount" name="amount" required> </input>
                                                 </div>
                                             </div>
                                             <input type="hidden" id="planId" name="planId" value="{{$id}}"> </input>
+                                            <input type="hidden" name="_token" value="{{ Session::token()  }}"> </input>
                                         </form>
                                     </div>
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="addToList()">Save changes</button>
+                                        <button type="button" class="btn btn-primary" onclick="$('#entriesForm').submit();">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -77,24 +78,26 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach ($entriesFromUserOne as $entries)
+                                @foreach ($categories as $category)
+                                    @foreach ($category->entries as $entry)
 
-                                    <tr>
-                                        <td>
-                                            {{$entries->date}}
-                                        </td>
-                                        <td>
-                                            {{$entries->entryName}}
-                                        </td>
-                                        <td>
-                                            <?php $index = $entries->categoryName; ?>
-                                            {{$index}}
+                                        <tr>
+                                            <td>
+                                                {{$entry->date}}
+                                            </td>
+                                            <td>
+                                                {{$entry->name}}
+                                            </td>
+                                            <td>
+                                                {{$category->name}}
 
-                                        </td>
-                                        <td>
-                                            {{$entries->amount}}
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                {{$entry->amount}}
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
                                 @endforeach
                                 </tbody>
                             </table>

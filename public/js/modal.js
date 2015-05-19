@@ -21,7 +21,5 @@ function addToList() {
     category.innerHTML = categoryValue;
     amount.innerHTML = amountValue;
 
-    $.post( "plan/" + $("#planId") + "/add", {}, function( data ) {
-        $( ".result" ).html( data );
-    });
+    $.post($("#planId").val() + "/add", $("#entriesForm").serialize() , function( data ) {    });
 }
