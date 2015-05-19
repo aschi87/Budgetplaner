@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/overview', 'WelcomeController@index');
+Route::get('/budgetplan', 'WelcomeController@index');
+
 Route::get('home', function(){return Redirect::to('budget');});
 Route::get('budget', 'BudgetController@index');
 
