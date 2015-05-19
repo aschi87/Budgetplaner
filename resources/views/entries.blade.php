@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Budget: {{ $budget->name }}</div> <!-- Wie macht man die 0 dynamisch?-->
+                    <div class="panel-heading">Budget: {{ $budget->name }}</div>
 
                     <div class="panel-body">
 
-                        <button id="btnEntry" type="button" class="myButton"  data-toggle="modal" data-target="#myModal">
+                        <button id="btnEntry" type="button" class="btn btn-default"  data-toggle="modal" data-target="#myModal">
                             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Eintrag
                         </button>
 
@@ -52,7 +52,7 @@
                                                 </div>
                                             </div>
                                             <input type="hidden" id="planId" name="planId" value="{{$id}}"> </input>
-                                            <input type="hidden" name="_token" value="{{ Session::token()  }}"> </input>
+                                            <input type="hidden" name="_token" value="{{ Session::token() }}"> </input>
                                         </form>
                                     </div>
 
@@ -63,7 +63,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div>
                             <table id="table" class="table table-striped table-bordered center" cellspacing="0" width="100%">
@@ -80,7 +79,6 @@
                                 <tbody>
                                 @foreach ($categories as $category)
                                     @foreach ($category->entries as $entry)
-
                                         <tr>
                                             <td>
                                                 {{$entry->date}}
@@ -90,18 +88,18 @@
                                             </td>
                                             <td>
                                                 {{$category->name}}
-
                                             </td>
                                             <td>
                                                 {{$entry->amount}}
                                             </td>
                                         </tr>
-
                                     @endforeach
                                 @endforeach
                                 </tbody>
+
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>

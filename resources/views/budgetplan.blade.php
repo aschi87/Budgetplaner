@@ -8,19 +8,12 @@
                     <div class="panel-heading">Hier können Sie einen Budgetplan erstellen</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" id="form">
+                        <form class="form-inline" action="" method="POST">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Budgetplan-Name:</label>
-                                <div class="col-sm-8">
-                                    <input type="text"  id="budgetPlanName" name="budgetPlanName" required> </input>
-                                </div>
+                                <label for="budgetPlanName">Budgetplan-Name:</label>
+                                <input id="budgetPlanName" type="text" class="form-control" name="budgetPlanName" required> </input>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label align-left">Neue Kategorie:</label>
-                                <div class="col-sm-8">
-                                    <input type="text" id="" name="" required> </input>
-                                </div>
-                            </div>
+                            <button class="btn btn-default" type="button" action="submit">Hinzufügen</button>
                         </form>
                     </div>
                 </div>

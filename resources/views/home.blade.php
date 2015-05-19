@@ -5,7 +5,11 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Budget-Übersicht</div>
+				<div class="panel-heading">Budget-Übersicht
+                        <button type="submit" class="btn btn-default pull-right" >
+                            <i class="glyphicon glyphicon-plus-sign"></i>
+                        </button>
+                </div>
 
 				<div class="panel-body">
 					Hallo {{ $user->name }}! Hier sind deine Budgets:
