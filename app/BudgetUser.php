@@ -8,4 +8,5 @@ class BudgetUser extends Model {
 
     protected $fillable = ['budget_id', 'user_id'];
 
+    public $timestamps = false;
 }

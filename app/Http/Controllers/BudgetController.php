@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Budget;
+use App\BudgetUser;
+use Request;
 use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller {
@@ -48,12 +51,17 @@ class BudgetController extends Controller {
         $entry->name = Request::input('name');
         $entry->save();
 
+        $entryId = $entry->id;
+        $userId = $user->id;
+
         $budgetUser = new BudgetUser;
-        $budgetUser->budget_id = $entry->id;
-        $budgetUser->user_id = $user->id; // Evtl. Auth::id();
+        $budgetUser->budget_id = $entryId;
+        $budgetUser->user_id = $userId; // Evtl. Auth::id();
         $budgetUser->save();
 
-        return view('home');
+        $budgetPlans = $user->budgets;
+
+        return view('home', compact('user', 'budgetPlans'));
     }
 
 }
