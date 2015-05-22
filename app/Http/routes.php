@@ -21,6 +21,7 @@ Route::get('budget', 'BudgetController@index');
 Route::pattern('id', '[0-9]+');
 Route::get('plan/{id}', 'EntriesController@index');
 Route::post('plan/{id}','EntriesController@saveEntry');
+//Route::post('plan/{id}','EntriesController@saveCategory');
 
 Route::post('/budget','BudgetController@saveBudget');
 

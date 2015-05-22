@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Budget;
 use Illuminate\Support\Facades\Auth;
 
 class BudgetplanController extends Controller {
@@ -19,8 +20,7 @@ class BudgetplanController extends Controller {
      */
     public function index()
     {
-        $user = User::find(Auth::id());
-        $budgetPlans = $user->budgets;
+        $budgetPlans = Budget::all();
         return view('budgetplan', compact('user', 'budgetPlans'));
     }
 

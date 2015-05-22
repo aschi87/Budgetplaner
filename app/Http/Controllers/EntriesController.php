@@ -30,8 +30,6 @@ class EntriesController extends Controller {
 
     public function saveEntry(Request $request, $id)
     {
-        $posten = Request::all();
-
         $entry = new Entry;
         $entry->name = Request::input('name');
         $entry->amount = Request::input('amount');
@@ -39,6 +37,18 @@ class EntriesController extends Controller {
         $entry->category_id = Request::input('category');
 
         $entry->save();
+
+        return redirect('plan/'.$id);
+    }
+
+    public function saveCategory(Request $request, $id)
+    {
+        $category = new Category;
+        $category->name = Request::input('category');
+        $category->limit = Request::input('limit');
+        $category->budget_id = $id;
+
+        $category->save();
 
         return redirect('plan/'.$id);
     }
