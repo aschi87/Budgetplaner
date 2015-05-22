@@ -22,6 +22,7 @@ Route::pattern('id', '[0-9]+');
 Route::get('plan/{id}', 'EntriesController@index');
 Route::post('plan/{id}','EntriesController@saveEntry');
 
+Route::post('/','BudgetController@saveBudget');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

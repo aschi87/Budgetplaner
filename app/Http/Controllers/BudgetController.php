@@ -25,7 +25,7 @@ class BudgetController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth'); // auth
+		$this->middleware('auth');
 	}
 
 	/**
@@ -37,7 +37,23 @@ class BudgetController extends Controller {
 	{
         $user = User::find(Auth::id());
         $budgetPlans = $user->budgets;
-		return view('home', compact('user', 'budgetPlans')); // ehemals home
+		return view('home', compact('user', 'budgetPlans'));
 	}
+
+    public function saveBudget(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $entry = new Budget;
+        $entry->name = Request::input('name');
+        $entry->save();
+
+        $budgetUser = new BudgetUser;
+        $budgetUser->budget_id = $entry->id;
+        $budgetUser->user_id = $user->id; // Evtl. Auth::id();
+        $budgetUser->save();
+
+        return view('home');
+    }
 
 }

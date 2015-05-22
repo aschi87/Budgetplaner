@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">Name:</label>
                                             <div class="col-sm-8">
-                                                <input type="text" id="name" name="name" required> </input>
+                                                <input type="text" name="name" required> </input>
                                             </div>
                                         </div>
                                     </div>
@@ -54,8 +54,8 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="$('#addBudgetForm').submit();">Save changes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                <button type="button" class="btn btn-primary" onclick="$('#addBudgetForm').submit();">Speichern</button>
                             </div>
                         </div>
                     </div>
