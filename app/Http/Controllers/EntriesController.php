@@ -8,7 +8,6 @@ use App\Category;
 use App\Entry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent;
-use Illuminate\Support\Facades\DB;
 use Request;
 
 class EntriesController extends Controller {
@@ -20,7 +19,6 @@ class EntriesController extends Controller {
 
     public function index($id)
     {
-
         // Sollte noch überprüft werden, damit man nicht über die URL die Einträge einsehen kann.
         $user = User::find(Auth::id());
         $budget = Budget::find($id);
