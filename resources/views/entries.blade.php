@@ -162,7 +162,6 @@
                                     <th>Posten</th>
                                     <th>Kategorie</th>
                                     <th>Betrag</th>
-                                    <th>Edit/Delete</th>
                                 </tr>
                                 </thead>
 

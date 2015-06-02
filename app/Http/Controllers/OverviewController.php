@@ -21,7 +21,13 @@ class OverviewController extends Controller {
     {
         $user = User::find(Auth::id());
         $budgetPlans = $user->budgets;
+
         return view('overview', compact('user', 'budgetPlans'));
+    }
+
+    public function welcome()
+    {
+        return view('welcome');
     }
 
 }

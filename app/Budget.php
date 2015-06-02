@@ -15,19 +15,40 @@ class Budget extends Model {
         return $this->hasMany('App\Category');
     }
 
-    public function sum($budget_id)
+    public function sum()
     {
         $sum = 0;
-        $categories = DB::table('categories')->where('budget_id', $budget_id)->get();
-        $entries = DB::table('entries')->where('category_id', 'like', $categories)->get();
-
-            foreach ($entries as $entry)
-            {
-                $sum = $sum + ($entry->amount);
-                $sum += 1;
+        $categories = $this->categories;
+        foreach ($categories as $category)
+        {
+            $entries = $category->entries;
+            foreach($entries as $entry) {
+                $sum += $entry->amount;
             }
-        $sum += 1000;
+        }
         return $sum;
+    }
+
+    public function totalLimit()
+    {
+        $categories = $this->categories;
+        $totalLimit = 0;
+        foreach ($categories as $category)
+        {
+            $totalLimit += $category->limit;
+        }
+        return $totalLimit;
+    }
+
+    public function percent()
+    {
+        $budgetLimit = $this->totalLimit();
+
+        if($budgetLimit == 0) {
+            return 0;
+        }
+
+        return 100 / $budgetLimit * $this->sum();
     }
 
 }

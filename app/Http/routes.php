@@ -12,10 +12,11 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/welcome','OverviewController@welcome');
 Route::get('/overview', 'OverviewController@index');
 Route::get('/budgetplan', 'BudgetplanController@index');
 
-Route::get('home', function(){return Redirect::to('budget');});
+Route::get('home', function(){return Redirect::to('welcome');});
 Route::get('budget', 'BudgetController@index');
 
 
