@@ -41,13 +41,10 @@
 
                 @if (!Auth::guest())
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">Einträge erfassen</a></li>
+                        <li><a href="{{ url('/') }}">My Budget</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/overview') }}">Übersicht</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/budgetplan') }}">Budgetplan</a></li>
                     </ul>
                 @endif
 

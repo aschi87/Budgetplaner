@@ -64,4 +64,21 @@ class BudgetController extends Controller {
         return view('home', compact('user', 'budgetPlans'));
     }
 
+    public function shareBudget(Request $request)
+    {
+        $planId = Request::input('planId');
+        $users = Request::input('users');
+
+        if(is_array($users)) {
+            foreach ($users as $userId) {
+                $budgetUser = new BudgetUser;
+                $budgetUser->budget_id = $planId;
+                $budgetUser->user_id = $userId;
+                $budgetUser->save();
+            }
+        }
+
+        return redirect('plan/'.$planId);
+    }
+
 }

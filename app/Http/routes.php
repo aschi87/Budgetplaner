@@ -18,13 +18,12 @@ Route::get('/budgetplan', 'BudgetplanController@index');
 Route::get('home', function(){return Redirect::to('budget');});
 Route::get('budget', 'BudgetController@index');
 
+
 Route::pattern('id', '[0-9]+');
 Route::get('plan/{id}', 'EntriesController@index');
-
-
-Route::post('plan/{id}/saveentry','EntriesController@saveEntry');
-Route::post('plan/{id}/savecategory','EntriesController@saveCategory');
-
+Route::post('plan/{id}/saveEntry','EntriesController@saveEntry');
+Route::post('plan/{id}/saveCategory','EntriesController@saveCategory');
+Route::post('plan/{id}/share','BudgetController@shareBudget');
 
 Route::post('/budget','BudgetController@saveBudget');
 

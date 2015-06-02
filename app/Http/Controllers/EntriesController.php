@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Budget;
+use App\BudgetUser;
 use App\Category;
 use App\Entry;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,31 @@ class EntriesController extends Controller {
         $user = User::find(Auth::id());
         $budget = Budget::find($id);
         $categories = $budget->categories;
-        return view('entries', compact('user', 'budget', 'categories', 'id'));
+
+        $sum = 0;
+        foreach ($categories as $category) {
+            foreach ($category->entries as $entry) {
+                $sum = $sum + ($entry->amount);
+            }
+        }
+
+        $sharable = [];
+        $users = User::all();
+        $budgetUsers = BudgetUser::where('budget_id', '=', $id)->get();
+        foreach($users as $u){
+            $found = false;
+            foreach($budgetUsers as $budgetUser) {
+                if($budgetUser->user_id == $u->id){
+                    $found = true;
+                }
+            }
+            if(!$found) {
+                array_push($sharable, $u);
+            }
+        }
+
+
+        return view('entries', compact('user','sharable', 'budget', 'categories', 'id', 'sum'));
     }
 
     public function saveEntry(Request $request, $id)
