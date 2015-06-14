@@ -11,10 +11,11 @@
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 	<link href="{{ asset('/css/app.css')}}" rel="stylesheet">
-
+    <link href="{{ asset('/css/sortable-theme-bootstrap.css')}}" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="{{ asset('js/sortable.min.js')}}"></script>
     <script src="{{ asset('js/modal.js')}}"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>

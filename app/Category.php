@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Category extends Model {
 
@@ -10,7 +11,19 @@ class Category extends Model {
 
     public function entries()
     {
-        return $this->hasMany('App\Entry');
+        return $this->hasMany('App\Entry')->orderBy('date');
     }
 
+    public function moneyLeft()
+    {
+        $limit = $this->limit;
+        $entries = $this->entries;
+        foreach ($entries as $entry)
+        {
+            if ($entry->amount > 0) {
+                $limit -= $entry->amount;
+            }
+        }
+        return $limit;
+    }
 }

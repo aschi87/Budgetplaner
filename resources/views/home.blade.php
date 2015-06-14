@@ -6,10 +6,13 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">Budget-Übersicht
-                        <button id="btnAddBudget" type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#addBudgetModal">
-                            <i class="glyphicon glyphicon-plus-sign"></i>
-                        </button>
                 </div>
+                <div>
+                    <button id="btnAddBudget" type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#addBudgetModal">
+                        <i class="glyphicon glyphicon-plus-sign"></i> Budgetplan
+                    </button>
+                </div>
+
 
 				<div class="panel-body">
 					Hallo {{ $user->name }}! Hier sind deine Budgets:

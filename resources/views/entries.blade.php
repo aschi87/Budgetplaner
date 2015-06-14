@@ -2,19 +2,21 @@
 
 @section('content')
 
-    <div class = "container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Übersicht:
-            </div>
+    <div class = "container-fluid">
+        <div class="col-md-2 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Übersicht:
+                </div>
 
-            <div class="panel-body">
-                Total Ausgaben: {{$sum}}
+                <div class="panel-body">
+                    Total Ausgaben: CHF {{number_format($sum, 2)}}
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
@@ -30,8 +32,8 @@
                             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Kategorie
                         </button>
 <!-- SHARE BUTTON -->
-                        <button id="btnShare" type="button" class="btn btn-default"  data-toggle="modal" data-target="#shareModal">
-                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Budget teilen
+                        <button id="btnShare" type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#shareModal">
+                            <span aria-hidden="true"></span> Budget teilen
                         </button>
 
 
@@ -58,8 +60,8 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="$('#shareForm').submit();">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                        <button type="button" class="btn btn-primary" onclick="$('#shareForm').submit();">Speichern</button>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +95,8 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="$('#categoryForm').submit();">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                        <button type="button" class="btn btn-primary" onclick="$('#categoryForm').submit();">Speichern</button>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +116,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Datum:</label>
                                                 <div class="col-sm-8">
-                                                    <input id="datepicker" name="date" type="text" required>
+                                                    <input id="datepicker" name="date" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -145,8 +147,8 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="$('#entriesForm').submit();">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                        <button type="button" class="btn btn-primary" onclick="$('#entriesForm').submit();">Speichern</button>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +157,8 @@
 
 <!-- TABLE CREATION -->
                         <div>
-                            <table id="table" class="table table-striped table-bordered center" cellspacing="0" width="100%">
+                            <!-- table table-striped table-bordered center  -->
+                            <table data-sortable id="table" class="table table-striped table-bordered table-hover sortable-theme-bootstrap" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Datum</th>
@@ -167,6 +170,7 @@
 
                                 <tbody>
                                 @foreach ($categories as $category)
+                                    <!--$sortedEntries = Category::entries()->orderBy('amount')->get(); -->
                                     @foreach ($category->entries as $entry)
                                         <tr>
                                             <td>
