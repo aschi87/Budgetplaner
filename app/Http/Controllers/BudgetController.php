@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Budget;
+use App\Entry;
 use App\BudgetUser;
+use App\Category;
 use Request;
+use DB;
 use Illuminate\Support\Facades\Auth;
 
 class BudgetController extends Controller {
@@ -56,11 +59,38 @@ class BudgetController extends Controller {
 
         $budgetUser = new BudgetUser;
         $budgetUser->budget_id = $entryId;
-        $budgetUser->user_id = $userId; // Evtl. Auth::id();
+        $budgetUser->user_id = $userId;
         $budgetUser->save();
 
         $budgetPlans = $user->budgets;
 
+        return view('home', compact('user', 'budgetPlans'));
+    }
+
+    public function deleteAllBudgets()
+    {
+        $user = User::find(Auth::id());
+        $userId = $user->id;
+        $budgetsOfUser = DB::table('budget_user')->where('user_id', $userId)->get();
+        if(is_array($budgetsOfUser)) {
+
+            foreach ($budgetsOfUser as $budgetOfUser) {
+                $budget = Budget::find($budgetOfUser->budget_id);
+                $categories = $budget->categories;
+                    foreach ($categories as $category) {
+                        $entries = $category->entries;
+                        foreach ($entries as $entry) {
+                            Entry::find($entry->id)->delete();
+                        }
+                        Category::find($category->id)->delete();
+                        $budgetId = $category->budget_id;
+                    }
+                BudgetUser::where('user_id', $userId)->delete();
+                Budget::where('id', $budgetId)->delete();
+            }
+
+        }
+        $budgetPlans = $user->budgets;
         return view('home', compact('user', 'budgetPlans'));
     }
 

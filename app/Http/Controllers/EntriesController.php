@@ -64,6 +64,25 @@ class EntriesController extends Controller {
         return redirect('plan/'.$id);
     }
 
+    public function editEntry(Request $request, $rowId, $id)
+    {
+        $entry = Entry::where('id', '=', $rowId);
+        $entry->name = Request::input('name');
+        $entry->amount = Request::input('amount');
+        $entry->date = Request::input('date');
+        $entry->category_id = Request::input('category');
+
+        $entry->update();
+
+        return redirect('plan/'.$id);
+    }
+
+    public function deleteEntry($entryId)
+    {
+        alert($entryId);
+        Entry::where('id', $entryId)->delete();
+    }
+
     public function saveCategory(Request $request, $id)
     {
         $category = new Category;

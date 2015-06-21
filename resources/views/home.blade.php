@@ -8,6 +8,11 @@
 				<div class="panel-heading">Budget-Übersicht
                 </div>
                 <div>
+                    <button id="btnDeleteAllBudgets" type="button" class="btn btn-danger pull-right"  data-toggle="modal" data-target="#deleteAllBudgetsModal">
+                        <i class="glyphicon glyphicon-alert"></i> Budgets löschen
+                    </button>
+                </div>
+                <div>
                     <button id="btnAddBudget" type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#addBudgetModal">
                         <i class="glyphicon glyphicon-plus-sign"></i> Budgetplan
                     </button>
@@ -33,7 +38,7 @@
                         @endforeach
                     @endif
 				</div>
-
+<!-- ADD BUDGET -->
                 <div class="modal fade" id="addBudgetModal" tabindex="-1" role="dialog" aria-labelledby="addBudgetModal" data-target="#addBudget" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -61,6 +66,28 @@
                                 <button type="button" class="btn btn-primary" onclick="$('#addBudgetForm').submit();">Speichern</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+<!-- DELETE ALL BUDGETS -- >
+                <!-- Modal -->
+                <div class="modal fade" id="deleteAllBudgetsModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Alle Budgets löschen</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Wollen Sie all ihre Budgets unwiederruflich löschen?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                <button type="button" class="btn btn-primary" onclick="window.location='{{ url("/deleteAll") }}'">Löschen</button> <!-- Dieser Button muss zu deleteAll weiterleiten... -->
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
